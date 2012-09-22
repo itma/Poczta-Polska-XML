@@ -4,6 +4,9 @@
  * Klasa PocztaPolskaPrzesylka jest reprezentantem struktury Przesylka
  * @author Andrzej Bernat <andrzej@itma.pl>
  */
+
+require_once 'PocztaPolska.php';
+
 class PocztaPolskaPrzesylka extends PocztaPolska {
     
     /**

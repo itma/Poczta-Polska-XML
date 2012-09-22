@@ -4,6 +4,9 @@
  * Klasa PocztaPolskaNadawca jest reprezentantem struktury Nadawca
  * @author Andrzej Bernat <andrzej@itma.pl>
  */
+
+require_once 'PocztaPolska.php';
+
 class PocztaPolskaNadawca extends PocztaPolska {
  
     /**

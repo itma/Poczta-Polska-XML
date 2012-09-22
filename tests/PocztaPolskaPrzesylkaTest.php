@@ -59,5 +59,12 @@ class PocztaPolskaPrzesylkaTest extends PHPUnit_Framework_TestCase {
         $this->assertObjectHasAttribute('ponadwymiarowa', $this->_object);
     }
 
+    public function testRodzajPrzesylki() {
+        $this->_object->rodzajPrzesylki(PocztaPolskaXML::EPRZESYLKA);
+        $this->assertEquals($this->_object->rodzajPrzesylki(), PocztaPolskaXML::EPRZESYLKA);
+        $this->setExpectedException('Exception');
+        $this->_object->rodzajPrzesylki('brak');
+    }        
+    
 }
 ?>
