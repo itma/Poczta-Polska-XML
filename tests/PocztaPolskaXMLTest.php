@@ -50,8 +50,11 @@ class PocztaPolskaXMLTest extends PHPUnit_Framework_TestCase {
     }
     
     public function testDodajPrzesylki() {
+        
+        $this->markTestIncomplete('Test niekompletny.');        
+        
         $przesylki = array();
-        $przesylki[0] = new PocztaPolskaPrzesylka();
+        $przesylki[0] = new PocztaPolskaPrzesylkaPobraniowa();
         $przesylki[0]->symbol = 846;
         $przesylki[0]->nrNadania = '';
         $przesylki[0]->masa = '';
@@ -92,7 +95,8 @@ class PocztaPolskaXMLTest extends PHPUnit_Framework_TestCase {
     }
     
     public function testGenerujPlik() {
-        //$this->_object->generujPlik();
+        $this->markTestIncomplete('Test niekompletny.');        
+        $this->_object->generujPlik();
     }
 }
 ?>
