@@ -90,6 +90,13 @@ class PocztaPolskaPrzesylkaPobraniowa extends PocztaPolskaPrzesylka implements E
     public $wartosc;    
     
     /**
+     * Konstruktor
+     */
+    public function __construct() {
+        parent::__construct();
+    }        
+    
+    /**
      * Metoda ustawia reguly walidacji
      * @return array
      */

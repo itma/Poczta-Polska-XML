@@ -61,6 +61,15 @@ class PocztaPolskaPrzesylkaAdresat extends PocztaPolska implements ElementXML {
     public $kraj;
     
     /**
+     * Konstruktor
+     */
+    public function __construct() {
+        if (!$this->guid) {
+            $this->guid = $this->generujGuid();
+        }
+    } 
+    
+    /**
      * Metoda ustawia reguly walidacji
      * @return array
      */

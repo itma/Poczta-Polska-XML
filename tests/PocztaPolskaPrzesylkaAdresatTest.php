@@ -33,5 +33,9 @@ class PocztaPolskaPrzesylkaAdresatTest extends PHPUnit_Framework_TestCase {
     public function testRegulyWalidacji() {
         $this->assertInternalType('array', $this->_object->regulyWalidacji());
     }    
+    
+    public function testGenerujGuid() {
+        $this->assertInternalType('string', $this->_object->generujGuid());
+    }                
 }
 ?>

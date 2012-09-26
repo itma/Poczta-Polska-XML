@@ -79,6 +79,13 @@ class PocztaPolskaPrzesylkaPocztex extends PocztaPolskaPrzesylka implements Elem
     public $ponadwymiarowa;
 
     /**
+     * Konstruktor
+     */
+    public function __construct() {
+        parent::__construct();
+    }        
+    
+    /**
      * Metoda ustawia reguly walidacji
      * @return array
      */

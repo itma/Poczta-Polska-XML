@@ -51,6 +51,15 @@ class PocztaPolskaPrzesylka extends PocztaPolska implements ElementXML {
     public $wersja;
 
     /**
+     * Konstruktor
+     */
+    public function __construct() {
+        if (!$this->guid) {
+            $this->guid = $this->generujGuid();
+        }
+    }    
+    
+    /**
      * Metoda jesli przyjmuje jako parametr wartosc inna niz null to wartosc
      * ta jest ustawiana w polu 'rodzaj wysylki'. Jesli nie przyjmuje zadnego
      * parametru to zwraca wczesniej ustawiona wartosc.

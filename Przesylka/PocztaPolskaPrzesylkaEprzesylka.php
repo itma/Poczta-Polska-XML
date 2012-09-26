@@ -102,6 +102,13 @@ class PocztaPolskaPrzesylkaEprzesylka extends PocztaPolskaPrzesylka implements E
     public $miejscowoscUP;    
 
     /**
+     * Konstruktor
+     */
+    public function __construct() {
+        parent::__construct();
+    }        
+    
+    /**
      * Metoda waliduje pola obiektu
      */
     public function waliduj() {

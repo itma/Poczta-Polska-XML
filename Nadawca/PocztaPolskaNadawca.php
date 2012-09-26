@@ -74,6 +74,15 @@ class PocztaPolskaNadawca extends PocztaPolska implements ElementXML {
     public $zrodlo;
     
     /**
+     * Konstruktor
+     */
+    public function __construct() {
+        if (!$this->guid) {
+            $this->guid = $this->generujGuid();
+        }
+    }
+    
+    /**
      * Metoda ustawia reguly walidacji
      * @return array
      */

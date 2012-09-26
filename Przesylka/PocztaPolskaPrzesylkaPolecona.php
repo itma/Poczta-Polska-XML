@@ -85,6 +85,13 @@ class PocztaPolskaPrzesylkaPolecona extends PocztaPolskaPrzesylka implements Ele
     public $strefa;     
     
     /**
+     * Konstruktor
+     */
+    public function __construct() {
+        parent::__construct();
+    }        
+    
+    /**
      * Metoda ustawia reguly walidacji
      * @return array
      */

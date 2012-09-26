@@ -41,7 +41,6 @@ class PocztaPolskaXMLTest extends PHPUnit_Framework_TestCase {
         $nadawca->kod = 72382;
         $nadawca->nip = 594147382;
         $nadawca->zrodlo = 'NADAWCA';
-        $nadawca->guid = '123';
         $this->_object->dodajNadawce($nadawca);
         $this->assertInstanceOf('PocztaPolskaNadawca', $this->_object->nadawca());
     }
@@ -52,7 +51,6 @@ class PocztaPolskaXMLTest extends PHPUnit_Framework_TestCase {
         $zbior->dataUtworzenia = '2012-12-12T11:23:54';
         $zbior->opis = 'Opis';
         $zbior->iloscPrzesylek = 1;
-        $zbior->guid = '123';
         $this->_object->dodajZbior($zbior);
         $this->assertInstanceOf('PocztaPolskaZbior', $this->_object->zbior());
     }

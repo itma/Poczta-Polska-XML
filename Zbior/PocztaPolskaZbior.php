@@ -36,6 +36,15 @@ class PocztaPolskaZbior extends PocztaPolska implements ElementXML {
     public $iloscPrzesylek;
     
     /**
+     * Konstruktor
+     */
+    public function __construct() {
+        if (!$this->guid) {
+            $this->guid = $this->generujGuid();
+        }
+    }    
+    
+    /**
      * Metoda ustawia reguly walidacji
      * @return array
      */

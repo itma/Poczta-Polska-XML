@@ -25,6 +25,14 @@ abstract class PocztaPolska {
             }
         }
         return true;
-    }    
+    } 
+    
+    
+    /**
+     * Metoda zwraca globalne ID
+     */
+    public function generujGuid() {
+        return 'fakeGuid';
+    }
 }
 ?>
