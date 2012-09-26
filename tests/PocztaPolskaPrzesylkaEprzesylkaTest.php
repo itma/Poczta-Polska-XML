@@ -5,7 +5,7 @@
  * @author Andrzej Bernat <andrzej@itma.pl>
  */
 
-require_once('../PocztaPolskaPrzesylkaEprzesylka.php');
+require_once('../Przesylka/PocztaPolskaPrzesylkaEprzesylka.php');
 
 class PocztaPolskaPrzesylkaEprzesylkaTest extends PHPUnit_Framework_TestCase {
     
@@ -38,5 +38,9 @@ class PocztaPolskaPrzesylkaEprzesylkaTest extends PHPUnit_Framework_TestCase {
         $this->assertObjectHasAttribute('miejscowoscUP', $this->_object);
         $this->assertObjectHasAttribute('guid', $this->_object);
     }
+    
+    public function testRegulyWalidacji() {
+        $this->assertInternalType('array', $this->_object->regulyWalidacji());
+    }    
 }
 ?>

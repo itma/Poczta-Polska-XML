@@ -5,7 +5,7 @@
  * @author Andrzej Bernat <andrzej@itma.pl>
  */
 
-require_once('../PocztaPolskaNadawca.php');
+require_once('../Nadawca/PocztaPolskaNadawca.php');
 
 class PocztaPolskaNadawcaTest extends PHPUnit_Framework_TestCase {
     
@@ -31,5 +31,9 @@ class PocztaPolskaNadawcaTest extends PHPUnit_Framework_TestCase {
         $this->assertObjectHasAttribute('zrodlo', $this->_object);
         $this->assertObjectHasAttribute('guid', $this->_object);
     }
+    
+    public function testRegulyWalidacji() {
+        $this->assertInternalType('array', $this->_object->regulyWalidacji());
+    }        
 }
 ?>

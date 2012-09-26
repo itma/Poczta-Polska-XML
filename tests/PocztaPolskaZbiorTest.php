@@ -5,7 +5,7 @@
  * @author Andrzej Bernat <andrzej@itma.pl>
  */
 
-require_once('../PocztaPolskaZbior.php');
+require_once('../Zbior/PocztaPolskaZbior.php');
 
 class PocztaPolskaZbiorTest extends PHPUnit_Framework_TestCase {
     
@@ -26,5 +26,9 @@ class PocztaPolskaZbiorTest extends PHPUnit_Framework_TestCase {
         $this->assertObjectHasAttribute('iloscPrzesylek', $this->_object);
         $this->assertObjectHasAttribute('guid', $this->_object);
     }
+    
+    public function testRegulyWalidacji() {
+        $this->assertInternalType('array', $this->_object->regulyWalidacji());
+    }    
 }
 ?>

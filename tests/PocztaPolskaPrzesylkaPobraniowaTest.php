@@ -5,7 +5,7 @@
  * @author Andrzej Bernat <andrzej@itma.pl>
  */
 
-require_once('../PocztaPolskaPrzesylkaPobraniowa.php');
+require_once('../Przesylka/PocztaPolskaPrzesylkaPobraniowa.php');
 
 class PocztaPolskaPrzesylkaPobraniowaTest extends PHPUnit_Framework_TestCase {
     
@@ -36,6 +36,10 @@ class PocztaPolskaPrzesylkaPobraniowaTest extends PHPUnit_Framework_TestCase {
         $this->assertObjectHasAttribute('kwotaPobrania', $this->_object);
         $this->assertObjectHasAttribute('sposobPobrania', $this->_object);
         $this->assertObjectHasAttribute('guid', $this->_object);
+    }    
+    
+    public function testRegulyWalidacji() {
+        $this->assertInternalType('array', $this->_object->regulyWalidacji());
     }    
 }
 ?>

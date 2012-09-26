@@ -6,9 +6,10 @@
  * @author Andrzej Bernat <andrzej@itma.pl>
  */
 
-require_once 'PocztaPolska.php';
+require_once 'PocztaPolska/PocztaPolska.php';
+require_once 'PocztaPolska/ElementXML.php';
 
-class PocztaPolskaXML extends PocztaPolska {
+class PocztaPolskaXML extends PocztaPolska implements ElementXML {
     
     /**
      * Obiekt zbioru
@@ -29,19 +30,15 @@ class PocztaPolskaXML extends PocztaPolska {
     private $_przesylka = array();
     
     /**
-     * Numer wersji struktury w oparciu, o który został utworzony plik XML
-     * zawierający definicje przesyłek pocztowych.
-     * 
-     * @var string
-     */
-    const STRUKTURA = '1.6';
-
-    /**
      * Metoda dodaje nadawce do obiektu
      * @param PocztaPolskaNadawca $nadawca 
      */
     public function dodajNadawce(PocztaPolskaNadawca $nadawca) {
-        $this->_nadawca = $nadawca;
+        if ($nadawca->waliduj()) {
+            $this->_nadawca = $nadawca;
+        } else {
+            throw new Exception('Obiekt nadawcy nie zostal wypelniony wymaganymi danymi.');
+        }
     }
     
     /**
@@ -57,7 +54,11 @@ class PocztaPolskaXML extends PocztaPolska {
      * @param PocztaPolskaZbior $zbior 
      */
     public function dodajZbior(PocztaPolskaZbior $zbior) {
-        $this->_zbior = $zbior;
+        if ($zbior->waliduj()) {
+            $this->_zbior = $zbior;
+        } else {
+            throw new Exception('Obiekt zbioru nie zostal wypelniony wymaganymi danymi.');
+        }
     }
     
     /**
@@ -69,19 +70,43 @@ class PocztaPolskaXML extends PocztaPolska {
     }
     
     /**
-     * Metoda zwraca zawartosc pliku XML
-     * @return string
+     * Metoda ustawia reguly walidacji
+     * @return array
      */
-    public function generujPlik() {
-        switch ($this->rodzajPrzesylki()) {
-            case PocztaPolskaXML::POCZTOWA:
-                break;
-            case PocztaPolskaXML::POBRANIOWA:
-                break;
-            default:
-                throw New Exception('Nieznany rodzaj przesylki.');
-        }
+    public function regulyWalidacji() {
+        return array(
+            array(
+                'pole' => '_zbior',
+                'wymagane' => true,
+                'typ' => 'object'
+            ),
+            array(
+                'pole' => '_nadawca',
+                'wymagane' => true,
+                'typ' => 'object'
+            ),            
+            array(
+                'pole' => '_przesylka',
+                'wymagane' => true,
+                'typ' => 'array'
+            ),            
+        );
+    }    
+    
+    /**
+     * Walidacja pol obiektu
+     * @return boolean
+     */
+    public function waliduj() {
+        return parent::waliduj();
     }
+    
+    /**
+     * Metoda generuje czesc wynikowego pliku xml
+     */
+    public function generujXML() {
+        
+    }    
 }
 
 ?>
