@@ -58,9 +58,24 @@ class PocztaPolskaXMLTest extends PHPUnit_Framework_TestCase {
     public function testDodajPrzesylke() {
         $przesylka = new PocztaPolskaPrzesylkaListowaZwykla();
         $przesylka->ilosc = '1';
+        $przesylka->kategoria = 'E';
+        $przesylka->posteRestante = 'N';
+        $przesylka->egzBibl = 'N';
+        $przesylka->dlaOciem = 'N';
+        $przesylka->strefa = 'A';
+        
+        $adresat = new PocztaPolskaPrzesylkaAdresat();
+        $adresat->nazwa = 'Jan Kowalski';
+        $adresat->ulica = 'Wojskowa';
+        $adresat->lokal = '1';
+        $adresat->dom = '10';
+        $adresat->kod = '61000';
+        $adresat->miejscowosc = 'Poznań';
+        $adresat->kraj = 'Polska';
+        $przesylka->dodajAdresata($adresat);
+        
         $this->_object->dodajPrzesylke($przesylka);
         $this->assertInternalType('array', $this->_object->przesylki());
-        
         $przesylki = $this->_object->przesylki();
         $this->assertInstanceOf('PocztaPolskaPrzesylkaListowaZwykla', $przesylki[0]);
     }

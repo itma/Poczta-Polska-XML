@@ -76,7 +76,11 @@ class PocztaPolskaXML extends PocztaPolska implements ElementXML {
         if (!in_array('PocztaPolskaPrzesylka', class_parents(get_class($przesylka)))) {
             throw new Exception('Obiekt przesylki musi byc rozszerzany z obiektu PocztaPolskaPrzesylka');
         }
-        $this->_przesylka[] = $przesylka;
+        if ($przesylka->waliduj()) {
+            $this->_przesylka[] = $przesylka;
+        } else {
+            throw new Exception('Obiekt przesylki nie zostal wypelniony wymaganymi danymi.');
+        }        
     }
     
     /**

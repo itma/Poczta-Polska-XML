@@ -38,6 +38,20 @@ class PocztaPolskaNadawcaTest extends PHPUnit_Framework_TestCase {
     
     public function testGenerujGuid() {
         $this->assertInternalType('string', $this->_object->generujGuid());
-    }            
+    }       
+    
+    public function testDodajAdresata() {
+        $adresat = new PocztaPolskaPrzesylkaAdresat();
+        $adresat->nazwa = 'Jan Kowalski';
+        $adresat->ulica = 'Wojskowa';
+        $adresat->lokal = '1';
+        $adresat->dom = '10';
+        $adresat->kod = '61000';
+        $adresat->miejscowosc = 'Poznań';
+        $adresat->kraj = 'Polska';
+        $przesylka = new PocztaPolskaPrzesylka();
+        $przesylka->dodajAdresata($adresat);
+        $this->assertInstanceOf('PocztaPolskaPrzesylkaAdresat', $przesylka->adresat());
+    }
 }
 ?>

@@ -11,6 +11,12 @@ require_once '../PocztaPolska/ElementXML.php';
 class PocztaPolskaPrzesylka extends PocztaPolska implements ElementXML {
 
     /**
+     * Obiekt zawierajacy adresata przesylki
+     * @var object PocztaPolskaPrzesylkaAdresat
+     */
+    protected $_adresat;
+    
+    /**
      * Cyfrowy symbol odpowiadający typowi przesyłki
      * @var int
      */
@@ -63,20 +69,25 @@ class PocztaPolskaPrzesylka extends PocztaPolska implements ElementXML {
     }    
     
     /**
-     * Metoda jesli przyjmuje jako parametr wartosc inna niz null to wartosc
-     * ta jest ustawiana w polu 'rodzaj wysylki'. Jesli nie przyjmuje zadnego
-     * parametru to zwraca wczesniej ustawiona wartosc.
-     * @param string $rodzajPrzesylki (@see Obslugiwane rodzaje przesylek)
-     * @return string
+     * Metoda dodaje adresata przesylki
+     * @param PocztaPolskaPrzesylkaAdresat $adresat 
      */
-    public function rodzajPrzesylki($rodzajPrzesylki = null) {
-        if (is_null($rodzajPrzesylki)) {
-            return $this->symbol;
+    public function dodajAdresata(PocztaPolskaPrzesylkaAdresat $adresat) {
+        if ($adresat->waliduj()) {
+            $this->_adresat = $adresat;
         } else {
-            return $this->symbol = $rodzajPrzesylki;
+            throw new Exception('Obiekt adresata nie zostal wypelniony wymaganymi danymi.');
         }
     }
 
+    /**
+     * Metoda zwraca obiekt adresata
+     * @return object PocztaPolskaPrzesylkaAdresat
+     */
+    public function adresat() {
+        return is_object($this->_adresat) ? $this->_adresat : null;
+    }
+    
     /**
      * Metoda ustawia reguly walidacji
      * @return array
@@ -118,6 +129,11 @@ class PocztaPolskaPrzesylka extends PocztaPolska implements ElementXML {
                 'wymagane' => true,
                 'typ' => 'string'
             ),
+            array(
+                'pole' => '_adresat',
+                'wymagane' => true,
+                'typ' => 'object'
+            ),            
         );
     }
 
