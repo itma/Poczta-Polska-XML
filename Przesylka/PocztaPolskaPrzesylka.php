@@ -57,6 +57,9 @@ class PocztaPolskaPrzesylka extends PocztaPolska implements ElementXML {
         if (!$this->guid) {
             $this->guid = $this->generujGuid();
         }
+        if (!$this->wersja) {
+            $this->wersja = 1;
+        }
     }    
     
     /**

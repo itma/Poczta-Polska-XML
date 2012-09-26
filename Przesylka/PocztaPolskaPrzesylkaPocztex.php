@@ -83,6 +83,9 @@ class PocztaPolskaPrzesylkaPocztex extends PocztaPolskaPrzesylka implements Elem
      */
     public function __construct() {
         parent::__construct();
+        if (!$this->symbol) {
+            $this->symbol = self::ID;
+        }        
     }        
     
     /**

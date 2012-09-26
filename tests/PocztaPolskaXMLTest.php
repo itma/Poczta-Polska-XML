@@ -5,7 +5,7 @@
  * @author Andrzej Bernat <andrzej@itma.pl>
  */
 
-require_once('../Przesylka/PocztaPolskaPrzesylka.php');
+require_once('../Przesylka/PocztaPolskaPrzesylkaListowaZwykla.php');
 require_once('../Nadawca/PocztaPolskaNadawca.php');
 require_once('../Zbior/PocztaPolskaZbior.php');
 require_once('../PocztaPolskaXML.php');
@@ -53,6 +53,16 @@ class PocztaPolskaXMLTest extends PHPUnit_Framework_TestCase {
         $zbior->iloscPrzesylek = 1;
         $this->_object->dodajZbior($zbior);
         $this->assertInstanceOf('PocztaPolskaZbior', $this->_object->zbior());
+    }
+    
+    public function testDodajPrzesylke() {
+        $przesylka = new PocztaPolskaPrzesylkaListowaZwykla();
+        $przesylka->ilosc = '1';
+        $this->_object->dodajPrzesylke($przesylka);
+        $this->assertInternalType('array', $this->_object->przesylki());
+        
+        $przesylki = $this->_object->przesylki();
+        $this->assertInstanceOf('PocztaPolskaPrzesylkaListowaZwykla', $przesylki[0]);
     }
 }
 ?>

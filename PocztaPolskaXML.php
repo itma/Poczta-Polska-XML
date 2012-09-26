@@ -70,6 +70,24 @@ class PocztaPolskaXML extends PocztaPolska implements ElementXML {
     }
     
     /**
+     * Metoda dodaje przesylke do zbioru przesylek
+     */
+    public function dodajPrzesylke($przesylka) {
+        if (!in_array('PocztaPolskaPrzesylka', class_parents(get_class($przesylka)))) {
+            throw new Exception('Obiekt przesylki musi byc rozszerzany z obiektu PocztaPolskaPrzesylka');
+        }
+        $this->_przesylka[] = $przesylka;
+    }
+    
+    /**
+     * Metoda zwraca liste dolaczonych przesylek
+     * @return array
+     */
+    public function przesylki() {
+        return is_array($this->_przesylka) ? $this->_przesylka : null;
+    }
+    
+    /**
      * Metoda ustawia reguly walidacji
      * @return array
      */

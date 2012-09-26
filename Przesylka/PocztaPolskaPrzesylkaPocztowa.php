@@ -28,6 +28,9 @@ class PocztaPolskaPrzesylkaPocztowa extends PocztaPolskaPrzesylkaPolecona implem
      */
     public function __construct() {
         parent::__construct();
+        if (!$this->symbol) {
+            $this->symbol = self::ID;
+        }        
     }        
     
     /**
