@@ -71,3 +71,5 @@ TODO:
     * automatyczne zliczanie ilości przesyłek dołączonych do zbioru
     * rezultat walidacji obiektow zwracany przez metode np. $obiekt->bledy()
     * metoda generujaca nazwe pliku xml
+
+Notatka dotycząca języka polskiego użytego w nazwach właściwości i metod: osobiście nie przepadam za używaniem polskiego języka we wcześniej wymionych przypadkach ale z racji tego, że Poczta Polska to typowo polska instytucja i biblioteka nie będzie raczej wykorzystywana przez obcokrajowców postanowiłem wykorzystac w niej język polski.
