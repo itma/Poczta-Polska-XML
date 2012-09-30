@@ -9,6 +9,7 @@ Przykład użycia:
 
 // Obiekt generujacy wynikowy XML
 $ppxml = new PocztaPolskaXML();
+$ppxml->plik = '/home/user/' // sciezka do pliku w ktorym zostanie zapisany xml
 
 // Obiekt nadawcy
 $nadawca = new PocztaPolskaNadawca();
@@ -60,17 +61,13 @@ $przesylka->dodajAdresata($adresat);
 // Dodajemy obiekt przesylki do obiektu XML
 $ppxml->dodajPrzesylke($przesylka);
 
-// Generujemy wynikowy XML
-$ppxml->generujXML();
+// Generujemy i zapisujemy wynikowy XML
+$ppxml->zapiszXML();
 
 ```
 
 TODO:
 
-    - automatyczne zliczanie ilości przesyłek dołączonych do zbioru
-
-    - rezultat walidacji obiektow zwracany przez metode np. $obiekt->bledy()
-
-    - metoda generujaca nazwe pliku xml
-
-    - metoda zapisujaca xml do pliku
+    * automatyczne zliczanie ilości przesyłek dołączonych do zbioru
+    * rezultat walidacji obiektow zwracany przez metode np. $obiekt->bledy()
+    * metoda generujaca nazwe pliku xml

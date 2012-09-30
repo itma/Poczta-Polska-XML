@@ -30,6 +30,12 @@ class PocztaPolskaXML extends PocztaPolska implements ElementXML {
     protected $_przesylka = array();
     
     /**
+     * Sciezka do pliku w ktorym zostanie zapisany wynikowy xml
+     * @var string
+     */
+    public $plik;
+    
+    /**
      * Metoda dodaje nadawce do obiektu
      * @param PocztaPolskaNadawca $nadawca 
      */
@@ -124,7 +130,8 @@ class PocztaPolskaXML extends PocztaPolska implements ElementXML {
     }
     
     /**
-     * Metoda generuje czesc wynikowego pliku xml
+     * Metoda generuje wynikowy xml
+     * @return string
      */
     public function generujXML() {
         parent::generujXML();
@@ -160,7 +167,20 @@ class PocztaPolskaXML extends PocztaPolska implements ElementXML {
      */
     public function ElementXmlNazwa() {
         return 'PocztaPolskaXML';
-    }     
+    } 
+    
+    /**
+     * Metoda zapisuje wygenerowany xml na dysk
+     * return boolean
+     */
+    public function zapiszXML() {
+        $xml = $this->generujXML();
+        if ($this->plik) {
+            return file_put_contents($this->plik, $xml, LOCK_EX);
+        } else {
+            throw new Exception('Nie mozna zapisac xml do pliku. Sciezka do pliku do ktorego ma zostac zapisana zawartosc nie zostala podana.');
+        }
+    }
 }
 
 ?>
