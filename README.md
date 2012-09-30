@@ -65,5 +65,9 @@ $ppxml->generujXML();
 ```
 
 TODO:
+
     - automatyczne zliczanie ilości przesyłek dołączonych do zbioru
+
     - rezultat walidacji obiektow zwracany przez metode np. $obiekt->bledy()
+
+    - metoda pobierajace pola publiczne z obiektu
