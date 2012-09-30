@@ -75,6 +75,20 @@ abstract class PocztaPolska {
     }    
 
     /**
+     * Metoda zwraca dostepne z zewnatrz obiektu pola publiczne
+     * @return array
+     */
+    public function dostepnePola() {
+        $dostepnePola = array();
+        foreach ($this->regulyWalidacji() as $regula) {
+            if (strpos($regula['pole'], '_') !== 0 || strpos($regula['pole'], '_') === false) {
+                $dostepnePola[] = $regula['pole'];
+            }
+        }
+        return $dostepnePola;
+    }    
+    
+    /**
      * Metoda zwraca globalne ID
      * @see http://php.net/manual/pl/function.com-create-guid.php#52354
      */

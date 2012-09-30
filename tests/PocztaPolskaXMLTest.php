@@ -31,6 +31,10 @@ class PocztaPolskaXMLTest extends PHPUnit_Framework_TestCase {
         $this->assertInternalType('array', $this->_object->regulyWalidacji());
     }    
     
+    public function testDostepnePola() {
+        $this->assertInternalType('array', $this->_object->dostepnePola());
+    }
+    
     public function testDodajNadawce() {
         $nadawca = new PocztaPolskaNadawca();
         $nadawca->nazwa = 'Jan Kowalski';

@@ -71,4 +71,6 @@ TODO:
 
     - rezultat walidacji obiektow zwracany przez metode np. $obiekt->bledy()
 
-    - metoda pobierajace pola publiczne z obiektu
+    - metoda generujaca nazwe pliku xml
+
+    - metoda zapisujaca xml do pliku
