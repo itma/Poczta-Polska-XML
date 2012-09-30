@@ -15,19 +15,19 @@ class PocztaPolskaXML extends PocztaPolska implements ElementXML {
      * Obiekt zbioru
      * @var object PocztaPolskaZbior
      */
-    private $_zbior;
+    protected $_zbior;
     
     /**
      * Obiekt nadawcy
      * @var object PocztaPolskaNadawca
      */
-    private $_nadawca;
+    protected $_nadawca;
     
     /**
      * Tablica obiektow PocztaPolskaPrzesylka
      * @var array tablica obiektow PocztaPolskaPrzesylka
      */
-    private $_przesylka = array();
+    protected $_przesylka = array();
     
     /**
      * Metoda dodaje nadawce do obiektu
@@ -127,8 +127,40 @@ class PocztaPolskaXML extends PocztaPolska implements ElementXML {
      * Metoda generuje czesc wynikowego pliku xml
      */
     public function generujXML() {
+        parent::generujXML();
         
-    }    
+        if ($this->waliduj() &&
+            $this->_nadawca->waliduj() &&
+            $this->_zbior->waliduj()) {
+            $this->_nadawca->dodajXML($this->xml());
+            $this->_nadawca->generujXML();
+            $this->_zbior->dodajXML($this->xml());
+            $zbiorXML = $this->_zbior->generujXML();
+            
+            // przesylka
+            foreach ($this->przesylki() as $przesylka) {
+                if (!$przesylka->waliduj()) {
+                    throw new Exception('Podczas generowania pliku XML wystapily bledy. Obiekt ktorejs z przesylek nie jest wypelniony poprawnie.');
+                } else {
+                    $przesylka->dodajXML($this->xml());
+                    $przesylkaXML = $przesylka->generujXML();
+                    $zbiorXML->appendChild($przesylkaXML);
+                }
+            }                  
+            echo $this->xml()->saveXML();
+        } else {
+            throw new Exception('Podczas generowania pliku XML wystapily bledy. Obiekt PocztaPolskaXML nie jest wypelniony poprawnie lub ktorys z obiektow dolaczonych.');
+        }
+    }   
+    
+    /**
+     * Metoda zwraca nazwe elementu xml
+     * z tego modelu
+     * @return string
+     */
+    public function ElementXmlNazwa() {
+        return 'PocztaPolskaXML';
+    }     
 }
 
 ?>

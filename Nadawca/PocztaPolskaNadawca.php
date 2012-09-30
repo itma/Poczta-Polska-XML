@@ -77,6 +77,7 @@ class PocztaPolskaNadawca extends PocztaPolska implements ElementXML {
      * Konstruktor
      */
     public function __construct() {
+        parent::__construct();
         if (!$this->guid) {
             $this->guid = $this->generujGuid();
         }
@@ -156,9 +157,28 @@ class PocztaPolskaNadawca extends PocztaPolska implements ElementXML {
     
     /**
      * Metoda generuje czesc wynikowego pliku xml
+     * @return DOMNode
      */
     public function generujXML() {
-        // implementacja w klasach potomnych
+        // nadawca
+        $elementNadawca = $this->xml->createElement($this->ElementXmlNazwa());
+
+        foreach ($this->regulyWalidacji() as $regula) {
+            $atrybutNadawca = $this->xml->createAttribute($regula['pole']);
+            $atrybutNadawca->value = $this->$regula['pole'];
+            $elementNadawca->appendChild($atrybutNadawca);
+        }
+
+        return $this->xml->appendChild($elementNadawca);
+    }
+    
+    /**
+     * Metoda zwraca nazwe elementu xml
+     * z tego modelu
+     * @return string
+     */
+    public function ElementXmlNazwa() {
+        return 'Nadawca';
     }
     
 }

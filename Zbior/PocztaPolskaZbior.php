@@ -88,10 +88,27 @@ class PocztaPolskaZbior extends PocztaPolska implements ElementXML {
     
     /**
      * Metoda generuje czesc wynikowego pliku xml
+     * @return DOMNode
      */
     public function generujXML() {
-        // implementacja w klasach potomnych
+        $element = $this->xml->createElement($this->ElementXmlNazwa());
+
+        foreach ($this->regulyWalidacji() as $regula) {
+            $atrybut = $this->xml->createAttribute($regula['pole']);
+            $atrybut->value = $this->$regula['pole'];
+            $element->appendChild($atrybut);
+        }            
+
+        return $this->xml->appendChild($element);
     }
     
+    /**
+     * Metoda zwraca nazwe elementu xml
+     * z tego modelu
+     * @return string
+     */
+    public function ElementXmlNazwa() {
+        return 'Zbior';
+    }     
 }
 ?>

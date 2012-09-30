@@ -132,5 +132,14 @@ class PocztaPolskaPrzesylkaAdresat extends PocztaPolska implements ElementXML {
     public function generujXML() {
         
     }        
+    
+    /**
+     * Metoda zwraca nazwe elementu xml
+     * z tego modelu
+     * @return string
+     */
+    public function ElementXmlNazwa() {
+        return 'Adresat';
+    }     
 }
 ?>

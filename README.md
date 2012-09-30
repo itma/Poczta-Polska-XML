@@ -5,3 +5,4 @@ Biblioteka generująca plik w formacie XML służący do wymiany danych o przesy
 
 TODO:
     - automatyczne zliczanie ilości przesyłek dołączonych do zbioru
+    - rezultat walidacji obiektow zwracany przez metode np. $obiekt->bledy()
