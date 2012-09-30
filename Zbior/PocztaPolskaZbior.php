@@ -13,6 +13,9 @@ class PocztaPolskaZbior extends PocztaPolska implements ElementXML {
      * Nazwa zbioru, jaka została nadana przez system; w formacie: rrrr-mm-dd\lp
      * Przykład: 2009-06-18\1, nazwą zbioru jest rok-miesiąc-dzień, symbol „\”, 
      * nr kolejny zbioru utworzonego w danym dniu. 
+     * 
+     * Nazwa zbioru moze zostac podana jako liczba calkowita - wtedy zostanie wygenerowana
+     * jako kolejna nazwa na dzien dzisiejszy
      * @var string 
      */
     public $nazwa;
@@ -67,7 +70,7 @@ class PocztaPolskaZbior extends PocztaPolska implements ElementXML {
             ),
             array(
                 'pole' => 'iloscPrzesylek',
-                'wymagane' => true,
+                'wymagane' => false,
                 'typ' => 'int'
             ),
             array(
@@ -83,6 +86,16 @@ class PocztaPolskaZbior extends PocztaPolska implements ElementXML {
      * @return boolean
      */
     public function waliduj() {
+        
+        if (!$this->dataUtworzenia) {
+            $this->dataUtworzenia = gmdate("Y-m-d\TH:i:s");
+        }
+        if (!$this->nazwa) {
+            $this->nazwa = date('Y-m-d') . '\\1';
+        } else if (is_int($this->nazwa)) {
+            $this->nazwa = date('Y-m-d') . '\\' . $this->nazwa;
+        }                
+        
         return parent::waliduj();
     }
     

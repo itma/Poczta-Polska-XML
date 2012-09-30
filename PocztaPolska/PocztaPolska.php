@@ -71,7 +71,7 @@ abstract class PocztaPolska {
     public function generujXML() {
         // deklaracja xml
         $this->xml = new DOMDocument('1.0', 'ISO-8859-2');        
-        $this->formatOutput = true;
+        $this->xml->formatOutput = true;
         return $this->xml;
     }    
 

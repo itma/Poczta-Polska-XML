@@ -158,30 +158,31 @@ class PocztaPolskaPrzesylka extends PocztaPolska implements ElementXML {
         $elementPrzesylka->appendChild($atrybutPrzesykla);
 
         foreach ($this->dostepnePola() as $pole) {
-            // nowy atrybut przesylki
-            $elementAtrybut = $this->xml()->createElement(PocztaPolska::ATRYBUT, $this->$pole);
-
-            $atrybutTyp = $this->xml()->createAttribute(PocztaPolska::TYP);
-            $atrybutTyp->value = '';
-            $elementAtrybut->appendChild($atrybutTyp);                            
-
-            $atrybutAtrybut = $this->xml()->createAttribute(PocztaPolska::NAZWA);
-            $atrybutAtrybut->value = $pole;
-            $elementAtrybut->appendChild($atrybutAtrybut);                            
+            if ($pole == 'guid') {
+                continue;
+            }
             
+            // nowy atrybut przesylki
+            $element = $this->xml()->createElement(PocztaPolska::ATRYBUT, $this->$pole);
+            $atrybut = $this->xml()->createAttribute(PocztaPolska::TYP);
+            $atrybut->value = '';
+            $element->appendChild($atrybut);                            
+            $atrybut = $this->xml()->createAttribute(PocztaPolska::NAZWA);
+            $atrybut->value = $pole;
+            $element->appendChild($atrybut);                            
             // pole atrybutu do przesylki
-            $elementPrzesylka->appendChild($elementAtrybut);                                                        
+            $elementPrzesylka->appendChild($element);                                                        
         }
 
-        foreach ($this->adresat()->dostepnePola() as $poleAdresat) {
+        foreach ($this->adresat()->dostepnePola() as $pole) {
             // nowy atrybut przesylki
-            $elementAtrybut = $this->xml()->createElement(PocztaPolska::ATRYBUT, $this->adresat()->$poleAdresat);                        
+            $elementAtrybut = $this->xml()->createElement(PocztaPolska::ATRYBUT, $this->adresat()->$pole);                        
             $atrybutTypAdresat = $this->xml()->createAttribute(PocztaPolska::TYP);
             $atrybutTypAdresat->value = PocztaPolska::ADRESAT;
             $elementAtrybut->appendChild($atrybutTypAdresat);                            
 
             $atrybutNazwaAdresat = $this->xml()->createAttribute(PocztaPolska::NAZWA);
-            $atrybutNazwaAdresat->value = $poleAdresat;
+            $atrybutNazwaAdresat->value = $pole;
             $elementAtrybut->appendChild($atrybutNazwaAdresat);     
 
             $elementPrzesylka->appendChild($elementAtrybut);                                                        

@@ -81,6 +81,9 @@ class PocztaPolskaNadawca extends PocztaPolska implements ElementXML {
         if (!$this->guid) {
             $this->guid = $this->generujGuid();
         }
+        if (!$this->zrodlo) {
+            $this->zrodlo = 'NADAWCA';
+        }
     }
     
     /**

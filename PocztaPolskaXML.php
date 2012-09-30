@@ -136,7 +136,9 @@ class PocztaPolskaXML extends PocztaPolska implements ElementXML {
      */
     public function generujXML() {
         parent::generujXML();
-        
+        if (!$this->_zbior->iloscPrzesylek) {
+            $this->_zbior->iloscPrzesylek = count($this->przesylki());
+        }                
         if ($this->waliduj() &&
             $this->_nadawca->waliduj() &&
             $this->_zbior->waliduj()) {
@@ -155,7 +157,7 @@ class PocztaPolskaXML extends PocztaPolska implements ElementXML {
                     $zbiorXML->appendChild($przesylkaXML);
                 }
             }                  
-            echo $this->xml()->saveXML();
+            return $this->xml()->saveXML();
         } else {
             throw new Exception('Podczas generowania pliku XML wystapily bledy. Obiekt PocztaPolskaXML nie jest wypelniony poprawnie lub ktorys z obiektow dolaczonych.');
         }
@@ -176,10 +178,12 @@ class PocztaPolskaXML extends PocztaPolska implements ElementXML {
      */
     public function zapiszXML() {
         $xml = $this->generujXML();
-        if ($this->plik) {
+        if ($this->plik && is_dir($this->plik)) {
             return file_put_contents($this->plik . $this->generujNazwePliku(), $xml, LOCK_EX);
         } else {
-            throw new Exception('Nie mozna zapisac xml do pliku. Sciezka do pliku do ktorego ma zostac zapisana zawartosc nie zostala podana.');
+            throw new Exception('Nie mozna zapisac xml do pliku. Sciezka do pliku 
+                do ktorego ma zostac zapisana zawartosc nie zostala podana lub 
+                nie jest poprawna.');
         }
     }
     
@@ -188,7 +192,7 @@ class PocztaPolskaXML extends PocztaPolska implements ElementXML {
      * @return string
      */
     public function generujNazwePliku() {
-        return date('ymd') . '_' . date('His') . '_' . $this->_nadawca->nazwaSkrocona;
+        return date('ymd') . '_' . date('His') . '_' . $this->_nadawca->nazwaSkrocona . '.xml';
     }
 }
 
