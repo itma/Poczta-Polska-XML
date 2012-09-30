@@ -62,6 +62,7 @@ $ppxml->dodajPrzesylke($przesylka);
 
 // Generujemy wynikowy XML
 $ppxml->generujXML();
+
 ```
 
 TODO:
