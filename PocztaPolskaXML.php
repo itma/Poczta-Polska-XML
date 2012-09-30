@@ -31,6 +31,7 @@ class PocztaPolskaXML extends PocztaPolska implements ElementXML {
     
     /**
      * Sciezka do pliku w ktorym zostanie zapisany wynikowy xml
+     * Format /home/user/
      * @var string
      */
     public $plik;
@@ -176,10 +177,18 @@ class PocztaPolskaXML extends PocztaPolska implements ElementXML {
     public function zapiszXML() {
         $xml = $this->generujXML();
         if ($this->plik) {
-            return file_put_contents($this->plik, $xml, LOCK_EX);
+            return file_put_contents($this->plik . $this->generujNazwePliku(), $xml, LOCK_EX);
         } else {
             throw new Exception('Nie mozna zapisac xml do pliku. Sciezka do pliku do ktorego ma zostac zapisana zawartosc nie zostala podana.');
         }
+    }
+    
+    /**
+     * Metoda zwraca nazwe pliku w ktorym zostanie zapisana struktura xml
+     * @return string
+     */
+    public function generujNazwePliku() {
+        return date('ymd') . '_' . date('His') . '_' . $this->_nadawca->nazwaSkrocona;
     }
 }
 
